@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>💍 Anh có điều này muốn hỏi em...</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to top, #ffe4e1, #fffafc);
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      color: #d6336c;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .proposal-box {
+      max-width: 700px;
+      margin: 100px auto;
+      background: white;
+      border-radius: 20px;
+      padding: 40px 30px;
+      box-shadow: 0 10px 30px rgba(255, 182, 193, 0.5);
+    }
+
+    h1 {
+      font-size: 32px;
+      color: #c2185b;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.8;
+      margin: 10px 0;
+    }
+
+    .ring {
+      font-size: 60px;
+      animation: pulse 1.5s infinite;
+      margin: 30px 0;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    .btn {
+      background: #ff6f91;
+      border: none;
+      padding: 14px 32px;
+      font-size: 18px;
+      border-radius: 30px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      margin: 10px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(255, 105, 135, 0.4);
+    }
+
+    .btn:hover {
+      background: #f94f7c;
+    }
+
+    .btn-no {
+      background: #aaa;
+      font-size: 18px;
+    }
+
+    /* Nút không sẽ to dần khi click */
+    .btn-no.clicked {
+      animation: grow 0.5s forwards;
+    }
+
+    @keyframes grow {
+      from { transform: scale(1); }
+      to { transform: scale(1.7); background: #ccc; }
+    }
+
+    .heart-float {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .heart {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background: url('images/heart.png') no-repeat center center;
+      background-size: contain;
+      animation: float 6s linear infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hiệu ứng tim bay -->
+  <div class="heart-float" id="hearts"></div>
+
+  <div class="proposal-box">
+    <h1>💍 Em yêu...</h1>
+    <p>Chúng mình đã cùng nhau đi qua một chặng đường thật đẹp...</p>
+    <p>Anh nhận ra: không có điều gì tuyệt vời hơn là được thức dậy mỗi ngày và thấy em bên cạnh.</p>
+    <p>Anh muốn được là người nắm tay em đi đến hết cuộc đời này.</p>
+
+    <div class="ring">💍</div>
+    <h2>Đồng ý yêu anh 1 năm, 10 năm và mãi mãi nhé</h2>
+
+    <button class="btn btn-yes" onclick="sayYes()">💖 Em đồng ý 💖</button>
+    <button class="btn btn-no" id="noBtn" onclick="makeItGrow()">😢 Không</button>
+  </div>
+
+  <audio autoplay loop>
+    <source src="audio/proposal.mp3" type="audio/mpeg">
+    Trình duyệt không hỗ trợ audio.
+  </audio>
+
+  <script>
+    function sayYes() {
+      alert("Anh biết là em sẽ đồng ý mà 💕\nTụi mình sẽ sống hạnh phúc mãi mãi nhé!");
+      window.location.href = 'thankyou.html';
+    }
+
+    function makeItGrow() {
+      const noBtn = document.getElementById("noBtn");
+      noBtn.classList.add("clicked");
+      noBtn.innerText = "Ơ kìa 🥺";
+      setTimeout(() => {
+        noBtn.classList.remove("clicked");
+        noBtn.innerText = "😢 Không";
+      }, 2000);
+    }
+
+    // Tim bay
+    const heartContainer = document.getElementById("hearts");
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = 4 + Math.random() * 3 + "s";
+      heartContainer.appendChild(heart);
+      setTimeout(() => {
+        heart.remove();
+      }, 7000);
+    }, 500);
+  </script>
+</body>
+</html>

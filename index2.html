@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Anniversary 💖</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  
+ <div class="envelope">
+  <div class="flap"></div>
+  <div class="letter-content">
+    <h1>💌 Gửi Vợ anh...</h1>
+    <p>
+
+Gửi em, người yêu bé nhỏ của anh...
+
+Yêu em.Yên emmmm nhiều lắmmm.Yêu em nhiều chứ không phải yêu nhiều em nhaaaa. Anh... không biết viết thư tình đâu, nên nếu em đọc mà thấy kỳ kỳ thì… đừng cười anh nha. Hôm nay 24/06/2025 là đúng một năm mình yêu nhau rồi ó. Một năm tròn luôn đó. Nhanh hăm thiệt là nhanh luôn. Cứ tưởng mới hôm qua còn nhắn tin “Em ăn cơm chưa? Đang làm gì đấy ? Đồng đội chơi game không? Đi ngủ trước 23h59p59s " mà giờ chúng ta đã trải qua nhiều trải nhiệm tinh yêu vậy rồi.
+Anh nhớ có rất nhiều lần anh làm em giận, em tức, em khó chịu và cũng có nhiều lúc lơ em, không quan tâm em. Anh nghĩ lại nhiều lúc như thế anh thật ngố và trẻ con. Cũng có nhiều lúc anh vụng về các kiểu cũng có đôi lúc anh làm quá 1 vấn đề nào đó khiến em chán anh, đôi khi em muốn dừng lại nhưng mà em vẫn chọn ở lại bên anh, dù anh có hậu đậu, có hơi vô tâm. Cảm ơn em vì đã chịu đựng đứa như anh suốt 365 ngày vừa rồi...
+Anh không biết nói mấy lời lãng mạn hoa mỹ đâu anh ngu Tiếng Việt thật , nhưng mà... anh yêu em, anh thương em là thật. Thương kiểu đôi lúc không biết phải làm gì, chỉ biết nhớ. Thương kiểu thấy em cười là một ngày của anh sáng trưng lên liền luôn,
+Nếu em cho phép, anh mong sau một năm này, tụi mình sẽ có năm thứ hai, thứ ba… và cả đời luôn cho đến khi ngày nào mở mắt dậy chúng ta có thể nhìn thấy nhau được không? 
+
+<p class="">Thương em bé của anh lắm ❤️❤️❤️.</p>
+
+
+</p>
+
+  </div>
+</div>
+<div style="text-align: center; margin-top: 40px;">
+  <button onclick="location.href='index3.html'"
+    style="
+      padding: 14px 30px;
+      font-size: 18px;
+      background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+      border: none;
+      border-radius: 30px;
+      color: white;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(255, 192, 203, 0.5);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.3s;
+    "
+    onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 6px 18px rgba(255, 105, 180, 0.6)'"
+    onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 15px rgba(255, 192, 203, 0.5)'"
+  >
+    💞 Đến phần tiếp theo của hành trình tình yêu 💞
+  </button>
+</div>
+  <!-- Slideshow -->
+  <div class="slideshow-container">
+  <div class="slide"><img src="images/1_ (1).jpg" alt="Ảnh 1"></div>
+  <div class="slide"><img src="images/z5661607804659_829683a09540de677037b2bd9330fa6b.jpg" alt="Ảnh 2"></div>
+  <div class="slide"><img src="images/1_ (10).jpg" alt="Ảnh 3"></div>
+  <div class="slide"><img src="images/1_ (11).jpg" alt="Ảnh 4"></div>
+  <div class="slide"><img src="images/1_ (2).JPG" alt="Ảnh 5"></div>
+  <div class="slide"><img src="images/1_ (3).jpg" alt="Ảnh 6"></div>
+  <div class="slide"><img src="images/1_ (4).jpg" alt="Ảnh 7"></div>
+  <div class="slide"><img src="images/1_ (5).jpg" alt="Ảnh 8"></div>
+  <div class="slide"><img src="images/1_ (6).jpg" alt="Ảnh 9"></div>
+  <div class="slide"><img src="images/1_ (7).jpg" alt="Ảnh 10"></div>
+  <div class="slide"><img src="images/1_ (8).jpg" alt="Ảnh 11"></div>
+  <div class="slide"><img src="images/1_ (9).jpg" alt="Ảnh 12"></div>
+  <div class="slide"><img src="images/1_.jpg" alt="Ảnh 13"></div>
+  <div class="slide"><img src="images/1_.WEBP" alt="Ảnh 14"></div>
+  <div class="slide"><img src="images/z5731561427549_dd8cb511f7c7b5f654d8a036b24e992b.jpg" alt="Ảnh 15"></div>
+</div>
+
+    <a class="prev" onclick="changeSlide(-1)">❮</a>
+    <a class="next" onclick="changeSlide(1)">❯</a>
+  </div>
+
+  <!-- Floating text -->
+  <div id="floating-container"></div>
+<audio id="bgMusic" autoplay loop>
+  <source src="audio/love.MP3" type="audio/mpeg">
+  Trình duyệt của bạn không hỗ trợ audio.
+</audio>
+  <script src="script.js">
+      window.onload = () => {
+    setTimeout(autoSendMessage, 1000);
+    const audio = document.getElementById("bgMusic");
+    audio.play().catch((e) => {
+      console.log("Người dùng chưa tương tác, không thể tự phát âm thanh.");
+    });
+  };
+  </script>
+</body>
+</html>

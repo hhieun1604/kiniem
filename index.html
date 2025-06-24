@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Chim Bồ Câu Đưa Thư - Popup</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #b3e5fc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      margin-top: 20px;
+    }
+
+    .sky {
+      position: relative;
+      width: 90%;
+      max-width: 900px;
+      height: 300px;
+      background: linear-gradient(to top, #87ceeb, #e0f7ff);
+      border: 3px solid #4fc3f7;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px;
+      box-sizing: border-box;
+      margin-top: 30px;
+    }
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      object-fit: cover;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+
+    .pigeon {
+      position: absolute;
+      top: 120px;
+      left: 80px;
+      width: 70px;
+      z-index: 2;
+    }
+
+    .message {
+      position: absolute;
+      top: 170px;
+      left: 80px;
+      background: white;
+      border: 1px solid #ccc;
+      padding: 6px 12px;
+      border-radius: 10px;
+      font-size: 14px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      white-space: nowrap;
+      z-index: 1;
+    }
+
+    @keyframes fly {
+      0% { left: 80px; }
+      100% { left: calc(100% - 100px); }
+    }
+
+    .fly {
+      animation: fly 4s linear forwards;
+    }
+
+    .calendar {
+      margin-top: 40px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      padding: 30px 40px;
+      text-align: center;
+      max-width: 340px;
+    }
+
+    .calendar .month {
+      font-size: 24px;
+      font-weight: bold;
+      color: #d63031;
+    }
+
+    .calendar .year {
+      font-size: 18px;
+      color: #636e72;
+      margin-bottom: 20px;
+    }
+
+    .weekdays, .days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+    }
+
+    .weekdays div {
+      font-weight: bold;
+      color: #0984e3;
+    }
+
+    .day {
+      padding: 8px;
+      border-radius: 6px;
+      background: #ecf0f1;
+      color: #2d3436;
+    }
+
+    .highlight {
+      background: #fdcb6e;
+      color: #2d3436;
+      font-weight: bold;
+      border: 2px solid #d35400;
+    }
+
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      z-index: 10;
+      width: 80%;
+      max-width: 400px;
+      text-align: center;
+      transition: transform 0.4s ease;
+    }
+
+    .popup.active {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .popup h2 {
+      margin-top: 0;
+      color: #d6336c;
+    }
+
+    .popup p {
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .popup button {
+      margin-top: 20px;
+      padding: 8px 16px;
+      font-size: 15px;
+      background: #e84393;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    #startButton {
+      margin-top: 30px;
+      padding: 12px 20px;
+      font-size: 16px;
+      background: #00b894;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1>🕊️ CÓ 1 BỨC THƯ ĐƯỢC GỬI TỪ ANH NGƯỜI YÊU ĐẾN BẠN...</h1>
+
+  <!-- Âm thanh thư bay -->
+  <audio id="flySound" src="audio/thu_bay.mp3"></audio>
+
+  <!-- Bắt đầu -->
+  <button id="startButton">💌 Bắt đầu nhận thư</button>
+
+  <div class="sky">
+    <img src="./img/z6705486467357_c82802d77f2c639f0aab77d3023d1c74.jpg" class="avatar" alt="Anh">
+    <img src="./img/z6705487745287_405796d832ed174c6e6bbdc30b25bc17.jpg" class="avatar" alt="Em">
+    <img src="./img/thu.png" class="pigeon" id="pigeon" alt="Pigeon">
+    <div class="message" id="letter">Từ anh gửi đến em... 💌</div>
+  </div>
+
+  <div class="calendar">
+    <div class="month">Tháng 6</div>
+    <div class="year">2025</div>
+    <div class="weekdays">
+      <div>CN</div><div>T2</div><div>T3</div><div>T4</div><div>T5</div><div>T6</div><div>T7</div>
+    </div>
+    <div class="days">
+      <div class="day">1</div><div class="day">2</div><div class="day">3</div><div class="day">4</div><div class="day">5</div><div class="day">6</div><div class="day">7</div>
+      <div class="day">8</div><div class="day">9</div><div class="day">10</div><div class="day">11</div><div class="day">12</div><div class="day">13</div><div class="day">14</div>
+      <div class="day">15</div><div class="day">16</div><div class="day">17</div><div class="day">18</div><div class="day">19</div><div class="day">20</div><div class="day">21</div>
+      <div class="day">22</div><div class="day">23</div><div class="day highlight">24</div><div class="day">25</div><div class="day">26</div><div class="day">27</div><div class="day">28</div>
+      <div class="day">29</div><div class="day">30</div>
+    </div>
+  </div>
+
+  <div class="popup" id="popup">
+    <h2>📩 Thư Tình Đã Đến!</h2>
+    <p>Chúc em một ngày thật dịu dàng. Có một người ở đây luôn nhớ đến em! 💖</p>
+    <button onclick="window.location.href='index2.html'">Mở thư chi tiết</button>
+  </div>
+
+  <script>
+    document.getElementById("startButton").addEventListener("click", function () {
+      const pigeon = document.getElementById("pigeon");
+      const letter = document.getElementById("letter");
+      const popup = document.getElementById("popup");
+      const audio = document.getElementById("flySound");
+      const button = document.getElementById("startButton");
+
+      // Ẩn nút
+      button.style.display = "none";
+
+      // Bắt đầu animation
+      pigeon.classList.add("fly");
+      letter.classList.add("fly");
+
+      // Phát âm thanh
+      audio.play().catch(e => {
+        console.log("Không phát được âm thanh:", e);
+      });
+
+      // Hiện popup sau 4.5s
+      setTimeout(() => {
+        popup.classList.add("active");
+      }, 4500);
+    });
+  </script>
+
+</body>
+</html>

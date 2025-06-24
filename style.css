@@ -1,0 +1,307 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #ffe0e9, #ffddee);
+  overflow-x: hidden;
+}
+
+.letter {
+  margin: 50px auto;
+  padding: 30px;
+  max-width: 90%;
+  width: 600px;
+  border: 5px double #ff8ca3;
+  border-radius: 20px;
+  background: #fff0f4;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.letter h1 {
+  margin-bottom: 20px;
+  color: #ff4b7d;
+  font-size: 24px;
+}
+
+#letterText {
+  font-size: 18px;
+  color: #444;
+  text-align: left;
+  line-height: 1.6;
+}
+
+.slideshow-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: nowrap;
+  max-width: 900px;
+  margin: 45px auto;
+  overflow: hidden;
+}
+
+.slide {
+  flex: 0 0 calc(33.33% - 10px);
+  display: none; /* ẩn tất cả, chỉ 3 cái được hiện */
+}
+
+.slide img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+
+.caption {
+  padding: 15px;
+  background: #fff0f4;
+  text-align: center;
+  font-size: 16px;
+  color: #333;
+  border-radius: 0 0 20px 20px;
+}
+
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 45%;
+  padding: 12px;
+  color: white;
+  font-weight: bold;
+  font-size: 24px;
+  user-select: none;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.next { right: 0; }
+.prev { left: 0; }
+
+.prev:hover, .next:hover {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.fade {
+  animation: fadeEffect 1s ease-in-out;
+}
+
+@keyframes fadeEffect {
+  from { opacity: 0.3; }
+  to { opacity: 1; }
+}
+
+#floating-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.floating-text {
+  position: absolute;
+  color: #ff4b7d;
+  font-size: 20px;
+  font-weight: bold;
+  animation: fadeText 2s ease-in-out forwards;
+}
+
+@keyframes fadeText {
+  0% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 1; transform: scale(1.2); }
+  100% { opacity: 0; transform: scale(1); }
+}
+
+@media screen and (max-width: 768px) {
+  .letter, .slideshow-container {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .letter h1 {
+    font-size: 20px;
+  }
+
+  #letterText {
+    font-size: 16px;
+  }
+
+  .caption {
+    font-size: 14px;
+  }
+
+  .prev, .next {
+    font-size: 20px;
+  }
+}
+.heart {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  background: red;
+  transform: rotate(45deg);
+  animation: floatUp 4s ease-in infinite;
+  z-index: 999;
+}
+.heart::before,
+.heart::after {
+  content: "";
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  background: red;
+  border-radius: 50%;
+}
+.heart::before {
+  top: -10px;
+  left: 0;
+}
+.heart::after {
+  left: -10px;
+  top: 0;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(1) rotate(45deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-200px) scale(1.2) rotate(45deg);
+    opacity: 0;
+  }
+}
+.letter {
+  /* các thuộc tính cũ */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transform-style: preserve-3d;
+}
+.letter:hover {
+  transform: scale(1.03) rotateY(0deg) rotateX(0deg);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+.envelope {
+  position: relative;
+  width: 90%;
+  max-width: 600px;
+  margin: 60px auto;
+  perspective: 1000px;
+}
+
+.flap {
+  width: 100%;
+  height: 100px;
+  background: #ff8ca3;
+  transform-origin: top;
+  transform: rotateX(0deg);
+  transition: transform 1s ease;
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.letter-content {
+  background: #fff0f4;
+  padding: 30px;
+  border: 5px double #ff8ca3;
+  border-top: none;
+  border-radius: 0 0 20px 20px;
+  transform: translateY(-5px);
+  transition: transform 1s ease, opacity 1s ease;
+  opacity: 0;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.envelope:hover .flap {
+  transform: rotateX(-120deg);
+}
+
+.envelope:hover .letter-content {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.letter-content h1 {
+  color: #ff4b7d;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.letter-content p {
+  font-size: 18px;
+  color: #444;
+  line-height: 1.6;
+}
+@media screen and (max-width: 768px) {
+  .letter-content h1 {
+    font-size: 20px;
+  }
+  .letter-content p {
+    font-size: 16px;
+  }
+}
+
+.envelope {
+  position: relative;
+  width: 90%;
+  max-width: 600px;
+  margin: 60px auto;
+  perspective: 1500px;
+  transform-style: preserve-3d;
+}
+
+.flap {
+  width: 100%;
+  height: 120px;
+  background: linear-gradient(to bottom, #ff9dad, #ff7597);
+  transform-origin: top;
+  transform: rotateX(0deg);
+  transition: transform 0.8s ease-in-out;
+  border-radius: 15px 15px 0 0;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 2;
+}
+
+.letter-content {
+  background: linear-gradient(to bottom right, #fff0f4, #ffe3ea);
+  padding: 35px 30px;
+  border: 5px double #ff8ca3;
+  border-top: none;
+  border-radius: 0 0 20px 20px;
+  transform: translateY(-20px) scale(0.96);
+  opacity: 0;
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.15),
+    inset 0 0 15px rgba(255, 175, 200, 0.2);
+  transition: transform 0.8s ease, opacity 1s ease;
+  z-index: 1;
+  position: relative;
+}
+
+.envelope:hover .flap {
+  transform: rotateX(-135deg);
+  box-shadow: 0 30px 40px rgba(0, 0, 0, 0.4);
+}
+
+.envelope:hover .letter-content {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.letter-content h1 {
+  color: #ff4b7d;
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.letter-content p {
+  font-size: 18px;
+  color: #444;
+  line-height: 1.6;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3);
+}

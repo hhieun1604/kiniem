@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>💖 Em đồng ý rồi 💖</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle, #ffe4f0, #fff0f5);
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      color: #c2185b;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 42px;
+      margin-top: 100px;
+      animation: fadeInDown 1s ease-in-out;
+    }
+
+    p {
+      font-size: 22px;
+      margin-top: 20px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .fireworks {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    canvas {
+      display: block;
+    }
+
+    .heart {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background: url('images/heart.png') no-repeat center center;
+      background-size: contain;
+      animation: float 6s linear infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .btn-back {
+      margin-top: 50px;
+      background-color: #ff6f91;
+      border: none;
+      color: white;
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(255, 105, 135, 0.3);
+      transition: background 0.3s ease;
+    }
+
+    .btn-back:hover {
+      background-color: #f94f7c;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>💖 Em đã đồng ý rồi 💖</h1>
+  <p>Cảm ơn em vì đã chọn anh, vì đã đồng hành và vì đã yêu anh...</p>
+  <p>Hãy cùng nhau viết tiếp câu chuyện tình yêu đẹp nhất nhé! ✨</p>
+
+  <button class="btn-back" onclick="window.location.href='index.html'">Về trang đầu</button>
+
+  <!-- Hiệu ứng trái tim bay -->
+  <div id="hearts"></div>
+
+  <!-- Pháo hoa -->
+  <div class="fireworks">
+    <canvas id="canvas"></canvas>
+  </div>
+
+  <audio autoplay loop>
+    <source src="audio/thankyou.mp3" type="audio/mpeg">
+    Trình duyệt không hỗ trợ audio.
+  </audio>
+
+  <script>
+    // Tạo hiệu ứng trái tim bay
+    const heartContainer = document.getElementById("hearts");
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.top = "100%";
+      heart.style.animationDuration = 4 + Math.random() * 3 + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 7000);
+    }, 500);
+
+    // Pháo hoa đơn giản
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particles = [];
+
+    function createParticle(x, y, color) {
+      const particleCount = 100;
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: x,
+          y: y,
+          radius: 2 + Math.random() * 2,
+          dx: Math.cos(i * 2 * Math.PI / particleCount) * (Math.random() * 6),
+          dy: Math.sin(i * 2 * Math.PI / particleCount) * (Math.random() * 6),
+          alpha: 1,
+          color: color
+        });
+      }
+    }
+
+    function drawParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach((p, index) => {
+        ctx.globalAlpha = p.alpha;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, 2 * Math.PI);
+        ctx.fillStyle = p.color;
+        ctx.fill();
+        p.x += p.dx;
+        p.y += p.dy;
+        p.alpha -= 0.01;
+        if (p.alpha <= 0) particles.splice(index, 1);
+      });
+      ctx.globalAlpha = 1;
+      requestAnimationFrame(drawParticles);
+    }
+
+    setInterval(() => {
+      const x = Math.random() * canvas.width;
+      const y = Math.random() * canvas.height * 0.5;
+      const color = `hsl(${Math.random() * 360}, 100%, 60%)`;
+      createParticle(x, y, color);
+    }, 1000);
+
+    drawParticles();
+  </script>
+</body>
+</html>
